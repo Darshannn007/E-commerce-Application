@@ -9,6 +9,7 @@ import java.util.Optional;
 public interface ProductService {
     public List<ProductDTO> seeProduct();
     public String createProduct(ProductDTO productDto);
-    public boolean rmvProduct(Long id);
+    public String rmvProduct(Long id);
     public Optional<ProductEntity> getsinpro(Long id);
+    public String updPro(Long id, ProductDTO productDTO);
 }

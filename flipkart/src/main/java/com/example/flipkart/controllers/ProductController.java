@@ -16,22 +16,26 @@ public class ProductController {
     @Autowired
     ProductService productService;
 
-    @GetMapping("/get/product")
+    @GetMapping("/product")
     public List<ProductDTO> getProduct(){
         return productService.seeProduct();
     }
 
-    @PostMapping("/post/product")
+    @PostMapping("/product")
     public String postProduct(@RequestBody ProductDTO productDto){
-    return productService.createProduct(productDto);
+        return productService.createProduct(productDto);
     }
 
-    @DeleteMapping("/delete/product/{id}")
-    public boolean deleteProduct(@PathVariable Long id){
+    @DeleteMapping("/product/{id}")
+    public String deleteProduct(@PathVariable Long id){
         return productService.rmvProduct(id);
     }
-    @GetMapping("/get/productid/{id}")
+    @GetMapping("/product/{id}")
     public Optional<ProductEntity> getpProduct(@PathVariable Long id){
         return productService.getsinpro(id);
+    }
+    @PutMapping("/product/{id}")
+    public String putPro(@PathVariable Long id,@RequestBody ProductDTO productDTO){
+        return productService.updPro(id,productDTO);
     }
 }

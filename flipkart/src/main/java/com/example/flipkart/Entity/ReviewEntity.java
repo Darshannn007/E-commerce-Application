@@ -5,19 +5,18 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 
-@Table(name="product")
-public class ProductEntity {
+@Table(name="review")
+public class ReviewEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String review;
+    private Long productid;
     private Long userid;
-    private String name;
-    private Long date;
-    private Long price;
 }

@@ -26,13 +26,13 @@ public class ProductServiceIMPL implements ProductService {
         List<ProductDTO> dto = new ArrayList<>();
 
         for (ProductEntity productlist : productEntity){
-        ProductDTO dto1 = new ProductDTO();
-        dto1.setId(productlist.getId());
-        dto1.setName(productlist.getName());
-        dto1.setUserid(productlist.getUserid());
-        dto1.setPrice(productlist.getPrice());
-        dto1.setDate(productlist.getDate());
-        dto.add(dto1);
+            ProductDTO dto1 = new ProductDTO();
+            dto1.setId(productlist.getId());
+            dto1.setName(productlist.getName());
+            dto1.setUserid(productlist.getUserid());
+            dto1.setPrice(productlist.getPrice());
+            dto1.setDate(productlist.getDate());
+            dto.add(dto1);
         }
         return dto;
     }
@@ -46,20 +46,34 @@ public class ProductServiceIMPL implements ProductService {
     }
 
     @Override
-    public boolean rmvProduct(Long id) {
-        if (productRepository.existsById(id)) {
-            productRepository.deleteById(id);
-            return true;
-        }
-        else {
-            System.out.println("not found"+id);
-            return false;
-        }
+    public String rmvProduct(Long id) {
+        ProductEntity pre = productRepository.findById(id).get();
+        productRepository.delete(pre);
+        return "Deleted successfully";
     }
 
     @Override
     public Optional<ProductEntity> getsinpro(Long id) {
         Optional<ProductEntity> product = productRepository.findById(id);
         return product;
+    }
+
+    @Override
+    public String updPro(Long id, ProductDTO productDTO) {
+        ProductEntity pro = productRepository.findById(id).orElseThrow(() -> new RuntimeException("not found"+id));
+        if (productDTO.getName() != null) {
+        pro.setName(productDTO.getName());
+        }
+        if (productDTO.getPrice() != null) {
+            pro.setPrice(productDTO.getPrice());
+        }
+        if (productDTO.getUserid() != null) {
+            pro.setUserid(productDTO.getUserid());
+        }
+        if (productDTO.getDate() != null) {
+            pro.setDate(productDTO.getDate());
+        }
+        productRepository.save(pro);
+        return "product updated successfully";
     }
 }

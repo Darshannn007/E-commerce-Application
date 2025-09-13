@@ -1,5 +1,6 @@
 package com.example.flipkart.DTO;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,12 +8,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-
-public class ProductDTO {
+public class ReviewDTO {
     private Long id;
+    private String review;
+    private Long productid;
     private Long userid;
-    private String name;
-    private Long date;
-    private Long price;
-
 }
